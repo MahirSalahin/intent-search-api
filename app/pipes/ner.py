@@ -78,7 +78,7 @@ def clean_entities(entities: list) -> dict:
 
     reminder = ""
     for entity in entities:
-        if entity["entity_group"] not in ["PRICE_MAX", "PRICE_MIN"]:
+        if entity["entity_group"] not in ["PRICE_MAX", "PRICE_MIN"] and '#' not in entity["word"]:
             reminder += entity["word"] + " "
     result["REMINDER"] = reminder.strip()
 
