@@ -5,3 +5,5 @@ transformers
 pinecone
 dotenv
 hf_xet
+sqlmodel
+psycopg2

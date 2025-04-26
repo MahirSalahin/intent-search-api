@@ -108,9 +108,6 @@ async def keyword_search(
     pass
 
 if __name__ == "__main__":
-    from dotenv import load_dotenv
-    load_dotenv()
-
     # Example usage
     query = "Apple iPhone 14 Pro Max"
     result = fetch_products(query)
