@@ -55,12 +55,14 @@ async def semantic_search(
         sort_by: str = None,
 ):
     entities = extract_entities(query)
-    query_embedding = embed_text(query)
 
     categories = entities.get("CATEGORY")
     brands = entities.get("BRAND")
     min_price = entities.get("PRICE_MIN")
     max_price = entities.get("PRICE_MAX", None)
+    reminder = entities.get("REMINDER", query)
+
+    query_embedding = embed_text(reminder)
 
     if category is not None:
         categories.append(category)
@@ -72,7 +74,7 @@ async def semantic_search(
         max_price = max(price_max, max_price)
 
     print(f"Query: {query}")
-    print(f"Categories: {categories}, Brands: {brands}, Min Price: {min_price}, Max Price: {max_price}")
+    print(f"Categories: {categories}, Brands: {brands}, Min Price: {min_price}, Max Price: {max_price}, Reminder: {reminder}")
 
     filter = {}
 
@@ -89,7 +91,7 @@ async def semantic_search(
         vector=query_embedding,
         top_k=5,
         include_metadata=True,
-        # filter=filter
+        filter=filter
     )
 
     return [x['id'] for x in result['matches']]
@@ -102,6 +104,7 @@ async def keyword_search(
         max_price: float = None,
         sort_by: str = None,
 ):
+    print("Keyword search is not implemented yet.")
     pass
 
 if __name__ == "__main__":

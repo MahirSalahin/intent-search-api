@@ -15,7 +15,7 @@ categories = [
 # Some terms intentionally appear in multiple categories to support cross-category search
 categories_mapping = {
     "Computers_and_Accessories": [
-        "computers", "laptops", "desktops", "monitors", "printers", "keyboard", "mouse", "router", 
+        "computer", "laptop", "desktop", "monitor", "printer", "keyboard", "mouse", "router", 
         "networking", "storage", "hard drive", "ssd", "ram", "memory", "processor", "cpu", "gpu", 
         "graphics card", "motherboard", "power supply", "pc", "computer accessories", "usb", 
         "cables", "adapters", "webcam", "headset", "speakers", "tablet", "scanner", "server",

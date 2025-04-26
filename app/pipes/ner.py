@@ -22,6 +22,7 @@ def extract_entities(text: str) -> list:
 
 
 def clean_entities(entities: list) -> dict:
+    print(entities)
     result = {
         "CATEGORY": [],
         "PRICE_MAX": "",
@@ -72,6 +73,14 @@ def clean_entities(entities: list) -> dict:
 
     result["CATEGORY"] = list(category)
     result["BRAND"] = list(brand)
+    result["PRICE_MAX"] = float(result["PRICE_MAX"]) if result["PRICE_MAX"] else None
+    result["PRICE_MIN"] = float(result["PRICE_MIN"]) if result["PRICE_MIN"] else None
+
+    reminder = ""
+    for entity in entities:
+        if entity["entity_group"] not in ["PRICE_MAX", "PRICE_MIN"]:
+            reminder += entity["word"] + " "
+    result["REMINDER"] = reminder.strip()
 
     return result
 
