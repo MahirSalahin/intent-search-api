@@ -73,6 +73,7 @@ def setup_logging():
         
         logger.addHandler(loki_handler)
         logger.info("✅ Loki logging configured successfully")
+        logger.error("❌ Loki logging configured successfully")
     except Exception as e:
         # Make sure error is visible in console
         print(f"❌ Failed to configure Loki: {str(e)}")

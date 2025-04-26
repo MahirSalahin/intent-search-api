@@ -1,19 +1,25 @@
 services:
-  # api:
-  #   build: .
-  #   container_name: api
-  #   ports:
-  #     - "8000:8000"
-  #   volumes:
-  #     - ./app:/app
-  #   environment:
-  #     - PROMETHEUS_MULTIPROC_DIR=/tmp
-  #     - PYTHONUNBUFFERED=1
-  #   restart: unless-stopped
-  #   networks:
-  #     - monitoring
-  #   depends_on:
-  #     - jaeger
+  api:
+    build: .
+    container_name: api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./.env:/app/.env
+      - ./app:/app/app
+    environment:
+      - PROMETHEUS_MULTIPROC_DIR=/tmp
+      - PYTHONUNBUFFERED=1
+      - LOKI_URL=http://loki:3100/loki/api/v1/push
+      - DATABASE_URL=${DATABASE_URL}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+    restart: unless-stopped
+    networks:
+      - monitoring
+    depends_on:
+      - loki
+      - prometheus
+      - jaeger
 
   prometheus:
     image: prom/prometheus:v2.45.0
