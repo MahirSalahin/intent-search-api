@@ -1,6 +1,6 @@
 from transformers import pipeline
-from utils.brands import brands_mapping
-from utils.categories import categories_mapping
+from pipes.utils.brands import brands_mapping
+from pipes.utils.categories import categories_mapping
 
 pipe = pipeline(
     "ner", model="roundspecs/minilm-finetuned-ner", aggregation_strategy="simple"
