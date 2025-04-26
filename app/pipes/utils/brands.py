@@ -41,7 +41,6 @@ brands = [
     "speck",
     "wd",
     "logitech",
-    "hewlett packard enterprise",
     "buffalo",
     "startech.com",
     "zowie",
@@ -89,11 +88,9 @@ brands = [
     "a-data",
     "g.skill",
     "apacer",
-    "pny technologies",
     "infineon",
     "sony",
     "yli",
-    "steinberg ur22mkii",
     "toshiba",
     "istorage",
     "netgear",
@@ -147,7 +144,7 @@ brands_mapping = {
     "g.skill": ["g.skill", "g skill", "gskill", "g-skill"],
     
     # Storage Brands
-    "western digital": ["western digital", "wd", "wd digital", "western digital corp", "western dig"],
+    "western digital": ["western digital", "wd digital", "western digital corp", "western dig"],
     "seagate": ["seagate", "seagate technology", "seagate tech", "seagate corp"],
     "sandisk": ["sandisk", "sandisk corp", "sandisk corporation", "sand disk", "san disk"],
     "kingston": ["kingston", "kingston technology", "kingston digital", "kingston digital inc", "kingston technology company"],
@@ -171,7 +168,7 @@ brands_mapping = {
     # Peripheral Brands
     "logitech": ["logitech", "logitech international", "logi", "logitech g"],
     "razer": ["razer", "razer inc", "razer gaming", "razer usa"],
-    "steelseries": ["steelseries", "steel series", "steel-series", "ss"],
+    "steelseries": ["steelseries", "steel series", "steel-series"],
     "hyperx": ["hyperx", "hyper x", "hyper-x", "kingston hyperx"],
     "benq": ["benq", "ben q", "ben-q", "benq corporation"],
     "aoc": ["aoc", "a.o.c.", "a o c", "aoc monitor"],
