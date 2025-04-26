@@ -1,4 +1,5 @@
 fastapi
+pydantic
 uvicorn
 sentence-transformers
 transformers
@@ -7,3 +8,10 @@ dotenv
 hf_xet
 sqlmodel
 psycopg2
+py-grpc-prometheus
+python-logging-loki
+psutil
+
+opentelemetry-instrumentation-fastapi
+opentelemetry-distro
+opentelemetry-exporter-otlp-proto-grpc
