@@ -1,5 +1,5 @@
 from transformers import pipeline
-
+from pipes.utils.semantics import keywords_for_semantics
 pipe = pipeline("text-classification", model="roundspecs/minilm-finetuned-intent-classification")
 
 def classify_intent(text: str) -> str:
@@ -12,6 +12,9 @@ def classify_intent(text: str) -> str:
     Returns:
         str: The predicted intent label.
     """
+    for keyword in keywords_for_semantics:
+        if keyword in text.lower():
+            return "semantic"
     result = pipe(text)
     return result[0]['label']
 
