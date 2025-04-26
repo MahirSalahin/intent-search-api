@@ -118,7 +118,7 @@ brands_mapping = {
     "asus": ["asus"],
     "intel": ["intel"],
     "kingston": ["kingston"],
-    "apple": ["apple"],
+    "apple": ["apple", "macbook", "mac"],
     "amd": ["amd"],
     "zebra": ["zebra"],
     "vostro": ["vostro"],

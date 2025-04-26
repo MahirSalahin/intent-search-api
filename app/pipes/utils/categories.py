@@ -13,7 +13,7 @@ categories = [
 
 # Categories mapping should be carefully picked because if the NER model identifies them as categories, only products containing these in the category field will be returned.
 categories_mapping = {
-    "Computers_and_Accessories": ["computers", "laptops", "desktops", "monitors", "printers"],
+    "Computers_and_Accessories": ["computers", "laptops", "desktops", "monitors", "printers", "mac"],
     "Tools_and_Home_Improvement": ["tools", "home"],
     "Camera_and_Photo": ["cameras", "photography"],
     "Office_Products": ["office", "supplies", "stationery"],
