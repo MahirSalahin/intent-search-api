@@ -37,14 +37,7 @@ async def fetch_products(
             sort_by=sort_by,
         )
     else:
-        return await keyword_search(
-            query=query,
-            category=category,
-            brand=brand,
-            min_price=min_price,
-            max_price=max_price,
-            sort_by=sort_by,
-        )
+        return False
 
 async def semantic_search(
         query: str,
