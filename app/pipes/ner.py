@@ -70,8 +70,8 @@ def clean_entities(entities: list) -> dict:
                 if value in cat.lower():
                     brand.add(key)
 
-    result["CATEGORY"] = category
-    result["BRAND"] = brand
+    result["CATEGORY"] = list(category)
+    result["BRAND"] = list(brand)
 
     return result
 
