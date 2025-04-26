@@ -108,7 +108,7 @@ brands_mapping = {
     "asus": ["asus", "asustek", "asus computer", "asus rog", "republic of gamers", "asus networking", "asus router", "asus wifi"],
     "acer": ["acer", "acer inc", "acer computer"],
     "msi": ["msi", "micro-star international", "micro star", "micro star international", "micro-star", "msi gaming", "msi computer"],
-    "microsoft": ["microsoft", "ms", "microsoft corporation", "microsoft corp", "msft", "surface"],
+    "microsoft": ["microsoft", "microsoft corporation", "microsoft corp", "msft", "surface"],
     "toshiba": ["toshiba", "toshiba america", "toshiba corp", "toshiba storage", "toshiba hard drive"],
     "fujitsu": ["fujitsu", "fujitsu ltd", "fujitsu limited"],
     "ibm": ["ibm", "international business machines", "i.b.m.", "i b m"],

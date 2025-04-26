@@ -78,14 +78,41 @@ async def semantic_search(
 
     filter = {}
 
-    if min_price is not None:
-        filter["price"] = {"$gte": min_price}
-    if max_price is not None:
-        filter["price"] = {"$lte": max_price}
-    if categories is not None:
+    if min_price is not None and max_price is not None:
+        filter.update(
+            {
+                '$or': [
+                    {'price': {'$eq': 0}},
+                    {'price': {'$gte': min_price, '$lte': max_price}}
+                ]
+            }
+        )
+    elif min_price is not None:
+        filter.update(
+            {
+                '$or': [
+                    {'price': {'$eq': 0}},
+                    {'price': {'$gte': min_price}}
+                ]
+            }
+        )
+    elif max_price is not None:
+        filter.update(
+            {
+                '$or': [
+                    {'price': {'$eq': 0}},
+                    {'price': {'$lte': max_price}}
+                ]
+            }
+        )
+    if categories is not None and len(categories) > 0:
         filter["category"] = {"$in": categories}
-    if brands is not None:
+    if brands is not None and len(brands) > 0:
         filter["brand"] = {"$in": brands}
+    if brands is not None and len(brands) > 0:
+        filter["brand"] = {"$in": brands}
+
+    print(filter)
 
     result = index.query(
         vector=query_embedding,
@@ -94,7 +121,7 @@ async def semantic_search(
         filter=filter
     )
 
-    return [x['id'] for x in result['matches']]
+    return [x['id'] for x in result['matches']], filter
 
 async def keyword_search(
         query: str,
