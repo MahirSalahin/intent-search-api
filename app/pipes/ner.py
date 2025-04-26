@@ -49,29 +49,26 @@ def clean_entities(entities: list) -> dict:
         if ch.isdigit():
             result["PRICE_MAX"] += ch
 
-    category = None
-    brand = None
+    category = set()
+    brand = set()
 
     for cat in result["CATEGORY"]:
         for key, values in categories_mapping.items():
             for value in values:
                 if value in cat.lower():
-                    category = key
-                    break
+                    category.add(key)
 
     for br in result["BRAND"]:
         for key, values in brands_mapping.items():
             for value in values:
                 if value in br.lower():
-                    brand = key
-                    break
-    if brand is None:
-        for cat in result["CATEGORY"]:
-            for key, values in brands_mapping.items():
-                for value in values:
-                    if value in cat.lower():
-                        brand = key
-                        break
+                    brand.add(key)
+
+    for cat in result["CATEGORY"]:
+        for key, values in brands_mapping.items():
+            for value in values:
+                if value in cat.lower():
+                    brand.add(key)
 
     result["CATEGORY"] = category
     result["BRAND"] = brand
