@@ -32,8 +32,8 @@ async def fetch_products(
             query=query,
             category=category,
             brand=brand,
-            min_price=min_price,
-            max_price=max_price,
+            price_min=min_price,
+            price_max=max_price,
             sort_by=sort_by,
         )
     else:
