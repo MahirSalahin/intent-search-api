@@ -1,7 +1,7 @@
 import logging
 import socket
 import sys
-from datetime import datetime
+import os
 
 def setup_logging():
     """Configure application logging with console and optional Loki output"""
@@ -37,20 +37,45 @@ def setup_logging():
     # Make sure propagation is disabled to avoid duplicate logs
     logger.propagate = False
     
-    # Setup Loki (optional) with the same simplified format
+    # Setup Loki with detailed formatting for better Grafana visualization
     try:
         import logging_loki
-        loki_url = "http://localhost:3100/loki/api/v1/push"
         
+        # Use docker service name if running in container, otherwise localhost
+        loki_url = os.environ.get("LOKI_URL", "http://localhost:3100/loki/api/v1/push")
+        
+        # Create a more detailed formatter for Loki logs
+        loki_formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        )
+        
+        # Configure Loki handler with additional labels for better querying
         loki_handler = logging_loki.LokiHandler(
             url=loki_url,
-            tags={"service": "api-server", "host": socket.gethostname()},
+            tags={
+                "service": "ecommerce-api", 
+                "host": socket.gethostname()
+            },
             version="1",
+            # Add these labels to make filtering by log level easier in Grafana
+            additional_labels={
+                "level": "%(levelname)s",
+                "module": "%(module)s"
+            }
         )
-        loki_handler.setFormatter(formatter)  # Use the same simplified formatter
-        loki_handler.setLevel(logging.INFO)
+        
+        # Use the detailed formatter
+        loki_handler.setFormatter(loki_formatter)
+        
+        # IMPORTANT: Set level to DEBUG to capture all logs including ERROR
+        loki_handler.setLevel(logging.DEBUG)
+        
         logger.addHandler(loki_handler)
+        logger.info("✅ Loki logging configured successfully")
     except Exception as e:
-        print(f"Failed to configure Loki: {str(e)}")
+        # Make sure error is visible in console
+        print(f"❌ Failed to configure Loki: {str(e)}")
+        logger.warning(f"Failed to configure Loki logging: {str(e)}")
     
     return logger

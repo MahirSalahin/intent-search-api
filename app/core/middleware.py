@@ -1,7 +1,8 @@
+import random
 import time
+import threading
 import logging
 import psutil
-import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
@@ -10,6 +11,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from prometheus_client import Counter, Histogram, Gauge
 from opentelemetry import trace
 from opentelemetry.trace.status import Status, StatusCode
+import os
 
 # Get logger
 logger = logging.getLogger("api")
@@ -55,8 +57,6 @@ current_process = psutil.Process(os.getpid())
 
 # Add this to your middleware.py file
 
-import threading
-import time
 
 def start_metrics_collection_thread(interval=15):
     """Start a thread to collect metrics at regular intervals"""
@@ -368,10 +368,6 @@ def setup_middleware(app: FastAPI):
         )
         
         
-import os
-import random
-import time
-import threading
 
 # Define this function if it doesn't exist
 def enable_gpu_simulation():
