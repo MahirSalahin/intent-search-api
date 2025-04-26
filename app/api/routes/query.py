@@ -2,10 +2,14 @@ from fastapi import APIRouter, Query
 from utils.fetch_products import fetch_products
 from crud.product import find_products_by_ids, fuzzy_search_products
 from api.deps import SessionDep
+from crud.product import find_products_by_ids
+from api.deps import SessionDep
 
 router = APIRouter(prefix="/query")
 
 
+@router.get("/")
+async def query_api(query: str, db: SessionDep):
 @router.get("/")
 async def query_api(query: str = Query(..., description="The search query"), 
                    db: SessionDep = None):
@@ -17,6 +21,18 @@ async def query_api(query: str = Query(..., description="The search query"),
         db (Session): Database session dependency.
 
     Returns:
+        List of products matching the query intent.
+    """
+    product_ids = await fetch_products(query)
+
+    products = find_products_by_ids(db, product_ids)
+
+    return ResponseMessage(
+        message="Successfully fetched products",
+        status_code=200,
+        data=products,
+        error=None
+    )
         List of products matching the query intent.
     """
     # Try semantic search first
