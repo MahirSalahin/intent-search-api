@@ -1,14 +1,15 @@
 from fastapi import APIRouter
+from schemas.product import Product
 from schemas.common import ResponseMessage
 
-router = APIRouter(prefix="/query")
+router = APIRouter(prefix="/product")
 
 
 @router.post("/", response_model=ResponseMessage)
-async def query_api(query: str):
+async def get_products(product: Product):
     return ResponseMessage(
-        message="Query received",
+        message="Products fetched",
         status_code=200,
-        data=query,
+        data=product,
         error=None
     )
