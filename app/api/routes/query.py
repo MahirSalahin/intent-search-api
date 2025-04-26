@@ -1,12 +1,14 @@
 from fastapi import APIRouter
 from schemas.common import ResponseMessage
 from utils.fetch_products import fetch_products
+from crud.product import find_products_by_ids
+from api.deps import SessionDep
 
 router = APIRouter(prefix="/query")
 
 
-@router.post("/")
-async def query_api(query: str):
+@router.get("/")
+async def query_api(query: str, db: SessionDep):
     """
     Query the API with a given query string.
 
@@ -14,7 +16,15 @@ async def query_api(query: str):
         query (str): The query string to search for.
 
     Returns:
-        ResponseMessage: The response message containing the results.
+        List of products matching the query intent.
     """
-    results = await fetch_products(query)
-    return results
+    product_ids = await fetch_products(query)
+
+    products = find_products_by_ids(db, product_ids)
+
+    return ResponseMessage(
+        message="Successfully fetched products",
+        status_code=200,
+        data=products,
+        error=None
+    )
