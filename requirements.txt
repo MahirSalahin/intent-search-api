@@ -2,3 +2,6 @@ fastapi
 uvicorn
 sentence-transformers
 transformers
+pinecone
+dotenv
+hf_xet
